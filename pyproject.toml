@@ -1,7 +1,31 @@
 [project]
 name = "adventofcode"
 version = "0.1.0"
-description = "Add your description here"
+description = "Advent of Code Solutions"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "mypy>=2.3.0",
+    "ruff>=0.15.21",
+    "wxpython>=4.2.5",
+]
+
+[tool.mypy]
+# Treat all files as strictly typed — no implicit Any, all args/returns annotated
+strict = true
+# Warn when ignoring errors that don't actually exist (keeps ignore comments clean)
+warn_unused_ignores = true
+
+[tool.ruff]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes (unused imports, undefined names, etc.)
+    "I",   # isort (import ordering)
+    "UP",  # pyupgrade (enforce modern Python syntax)
+    "B",   # flake8-bugbear (likely bugs and design issues)
+    "SIM", # flake8-simplify (simplifiable code patterns)
+]
