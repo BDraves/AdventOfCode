@@ -1,0 +1,9 @@
+from typing import Any, Protocol
+
+
+class Solution(Protocol):
+    _input: str
+
+    def _format_input(self) -> Any: ...
+    def part1(self) -> Any: ...
+    def part2(self) -> Any: ...
