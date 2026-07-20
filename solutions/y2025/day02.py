@@ -5,13 +5,29 @@ from typing import Any
 
 from solution import Solution
 
+def is_pair(number: int) -> bool:
+    text = str(number)
 
-def is_pair(id: int) -> bool:
-    # Cut the number in half
-    length: int = len(id)
-    first: str = str(id)[0:length//2]
-    last: str = str(id)[(length//2)+1:]
-    return first == last
+    if len(text) % 2 != 0:
+        return False
+
+    middle = len(text) // 2
+    return text[:middle] == text[middle:]
+
+def has_any_repeated_pairs(number: int) -> bool:
+    text = str(number)
+
+    for pattern_length in range(1, len(text) // 2 + 1):
+        if len(text) % pattern_length != 0:
+            continue
+
+        pattern = text[:pattern_length]
+        repetitions = len(text) // pattern_length
+
+        if pattern * repetitions == text:
+            return True
+
+    return False
 
 @dataclass(frozen=True)
 class Range:
@@ -31,7 +47,17 @@ class Day02(Solution):
         return [Range.from_string(line) for line in raw.split(",")]
 
     def part1(self) -> Any:
-        return sum([i for i in self.input if is_pair(i)])
+        return sum(
+            number
+            for interval in self.input
+            for number in range(interval.start, interval.end + 1)
+            if is_pair(number)
+        )
 
     def part2(self) -> Any:
-        raise NotImplementedError
+        return sum(
+            number
+            for interval in self.input
+            for number in range(interval.start, interval.end + 1)
+            if has_any_repeated_pairs(number)
+        )
