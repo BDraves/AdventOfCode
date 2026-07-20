@@ -5,6 +5,7 @@ description = "Advent of Code Solutions"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "flask>=3.1.1",
     "mypy>=2.3.0",
     "ruff>=0.15.21",
     "wxpython>=4.2.5",
